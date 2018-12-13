@@ -1,48 +1,42 @@
 <div class="container">
   <div class="row m-3">
     <div class="col-sm-12 col-md-8 offset-md-3">
-      <h2 class="text-center">Book Title</h2>
+      <h2 class="text-center">{{book?.title}}</h2>
 
-      <h6 class="text-center">Book Subtitle</h6>
+      <h6 class="text-center">{{book?.subtitle}}</h6>
 
       <div class="m-3">
-        <img class="rounded mx-auto d-block m-3" src="http://lorempixel.com/g/200/300/">
+        <img class="rounded mx-auto d-block m-3" src="{{ book?.imageLinks.thumbnail}}">
       </div>
-
 
       <dl>
         <dt>Description</dt>
         <dd>
-          <p [innerHtml]="'Hello this is the book <strong>description</strong> by binding to [innerHtml] we can use HTML tags'"></p>
+          <p [innerHtml]="book?.description"></p>
         </dd>
 
         <dt>Authors</dt>
-        <dd>Asim Hussain</dd>
+        <dd>{{book?.authors}}</dd>
 
         <dt>Categories</dt>
         <dd>
-          <span class="mr-1 badge badge-pill badge-secondary">
-            Category 1
+          <span *ngFor="let category of book?.categories" class="mr-1 badge badge-pill badge-secondary">
+            {{category}}
           </span>
-          <span class="mr-1 badge badge-pill badge-secondary">
-            Category 2
-          </span>
-          <span class="mr-1 badge badge-pill badge-secondary">
-            Category 3
-          </span>
+
         </dd>
 
         <dt>Published Date</dt>
-        <dd>2017-01-01</dd>
+        <dd>{{ book?.publishedDate }}</dd>
 
         <dt>Publisher</dt>
-        <dd>Code Craft</dd>
+        <dd>{{ book?.publisher }}</dd>
       </dl>
 
       <p>
-        <button type="button" class="btn btn-primary">Add To Library
+        <button type="button" *ngIf="!hasBook(book)" (click)="addBook(book)" class="btn btn-primary">Add To Library
         </button>
-        <button type="button" class="btn btn-default ml-sm-3">Remove From Library
+        <button type="button"  *ngIf="!hasBook(book)" (click)="removeBook(book)" class="btn btn-default ml-sm-3">Remove From Library
         </button>
       </p>
 
