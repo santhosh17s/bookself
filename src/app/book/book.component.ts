@@ -31,12 +31,14 @@ export class BookComponent {
   getBook(bookId: string) {
      this.bookService.retrieveBook(bookId)
                 .subscribe( (value:any) => {
-                  console.log(value.volumeInfo)
+                  //console.log(value)
+                  this.book.id = value.id;
                   this.book = value.volumeInfo;
                 });
   }
 
   hasBook(book: Book): boolean {
+    console.log("Has Book" + book)
     return this.libraryService.hasBook(book);
   }
 

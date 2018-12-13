@@ -16,6 +16,7 @@ export class LibraryService {
 
   private load() {
     let savedBooks = localStorage.getItem('books');
+    console.log(savedBooks)
     if (!savedBooks) {
       return
     }
