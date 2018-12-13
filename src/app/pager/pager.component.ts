@@ -1,4 +1,5 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
+
 
 @Component({
   selector: 'app-pager',
@@ -7,15 +8,24 @@ import {Component, OnInit} from "@angular/core";
 })
 export class PagerComponent implements OnInit {
 
+  @Input()
+  page:number = 1;
+
+  @Input()
+  private totalPages: number = 0;
+
+  @Output()
+  private changePage: EventEmitter<number> = new EventEmitter<number>();
+
   constructor() {
   }
 
   next() {
-    //TODO
+    this.changePage.emit(this.page + 1);
   }
 
   prev() {
-    //TODO
+    this.changePage.emit(this.page - 1);
   }
 
 

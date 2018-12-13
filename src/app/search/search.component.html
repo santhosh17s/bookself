@@ -2,15 +2,9 @@
   <div class="m-3 text-center">
     <form class="form-inline justify-content-center" (ngSubmit)="doSearch()">
       <div class="form-group mx-sm-3 ">
-        <input type="search"
-               class="form-control"
-               placeholder="Enter search string"
-               name="search"
-               [(ngModel)]="term"
-               required>
+        <input type="search" class="form-control" placeholder="Enter search string" name="search" [(ngModel)]="term" required>
       </div>
-      <button type="submit"
-              class="btn btn-primary">
+      <button type="submit" class="btn btn-primary">
         Search
       </button>
     </form>
@@ -18,28 +12,25 @@
 
     <div class="text-center">
       <!-- TODO: Show when we are calling the API -->
-      <p  *ngIf="bookService.initialised && bookService.loading"
-          class="lead">Loading...</p>
+      <p *ngIf="bookService.initialised && bookService.loading" class="lead">Loading...</p>
 
       <!-- TODO: Show when no results are returned from the API -->
-      <p *ngIf="bookService.initialised && !bookService.loading && bookService.books?.length === 0"
-          class="lead">No results returned</p>
+      <p *ngIf="bookService.initialised && !bookService.loading && bookService.books?.length === 0" class="lead">No results returned</p>
 
       <!-- TODO: Show when the user hasn't performed a search yet -->
-      <p *ngIf="!bookService.initialised"
-          class="lead">Enter a search string above and press search</p>
+      <p *ngIf="!bookService.initialised" class="lead">Enter a search string above and press search</p>
     </div>
   </div>
 
-  <ul>
+  <!-- <ul>
     <li *ngFor="let book of bookService.books">{{ book.title }}</li>
-  </ul>
+  </ul> -->
 
   <!-- TODO: Show the results of the search -->
-  <!--<app-book-list></app-book-list> -->
+  <app-book-list [books]="bookService.books"></app-book-list>
 
   <div class="d-flex justify-content-center">
     <!-- TODO: Show pagnation -->
-    <app-pager></app-pager>
+    <app-pager [page]="bookService.page" [totalPages]="bookService.totalPages" (changePage)="bookService.page = $event"></app-pager>
   </div>
 </div>
