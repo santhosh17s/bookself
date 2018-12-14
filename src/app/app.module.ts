@@ -30,13 +30,12 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule,
-    BrowserModule,
     ReactiveFormsModule,
-    FormsModule,
+    HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+   
   ],
   providers: [GoogleBooksService, LibraryService],
   bootstrap: [AppComponent]

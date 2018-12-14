@@ -1,4 +1,4 @@
-<nav  aria-label="Page navigation example">
+<nav *ngIf="page >= 1"  aria-label="Page navigation example">
   <ul  class="pagination">
     <li class="page-item" [class.disabled]="page === 1">
       <a class="page-link" (click)="prev()"> &larr; Previous

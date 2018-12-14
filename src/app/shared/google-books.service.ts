@@ -62,7 +62,13 @@ export class GoogleBooksService {
   }
 
   retrieveBook(bookId: string) {
-    return this.http.get(`${this.API_PATH}/${bookId}`)
+    return this.http.get<any>(`${this.API_PATH}/${bookId}`)
+                    .pipe(
+                      tap( value => console.log(value) ),
+                      map( items => {
+                        return this.bookFactory(items) 
+                      })
+                    );
   }
 
   private bookFactory(item: any): Book {

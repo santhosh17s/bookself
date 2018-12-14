@@ -3,6 +3,7 @@ import {Book} from "../shared/book";
 import { GoogleBooksService } from '../shared/google-books.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LibraryService } from '../shared/library.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-book',
@@ -12,7 +13,7 @@ import { LibraryService } from '../shared/library.service';
 export class BookComponent {
 
   private book:Book;
-
+  private urlBookId: string;
 
   constructor(
         private router: Router,
@@ -21,25 +22,28 @@ export class BookComponent {
         private libraryService: LibraryService) {
       
           this.route.params.subscribe( params => {
-            console.log(params);
             if(params['bookId']) {
+              this.urlBookId = params['bookId'];
               this.getBook(params['bookId']);
             }
-          })     
+          });
+          
+          console.log("book constructor");
   }
 
   getBook(bookId: string) {
      this.bookService.retrieveBook(bookId)
-                .subscribe( (value:any) => {
-                  //console.log(value)
-                  this.book.id = value.id;
-                  this.book = value.volumeInfo;
+                .subscribe( (book) => {
+                  console.log( book)
+                  this.book = book;
                 });
   }
 
   hasBook(book: Book): boolean {
-    console.log("Has Book" + book)
-    return this.libraryService.hasBook(book);
+    if(book) {
+      return this.libraryService.hasBook(book);
+    }  
+
   }
 
   addBook(book: Book) {
